@@ -5,5 +5,5 @@ Rails.application.routes.draw do
       delete :destroy
     end
   end
-  root 'users#new'
+  root 'user_sessions#new'
 end

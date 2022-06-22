@@ -11,7 +11,14 @@
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="pt-10">
+    <section class="fixed top-0 z-100 left-0 right-0">
+        <div id="nav" class="flex justify-end to-blue-400 shadow-lg items-center  h-10 ">
+            <%= link_to "註冊", new_user_path, class:"mx-0 hover:text-blue-200 text-xl text-lime-400	" %>
+            <%= link_to "登入", new_user_session_path, class:"mx-0 hover:text-blue-200 text-xl" %>
+            <%= link_to "登出", user_sessions_path, method: "delete", class:"xl:mx-0 hover:text-blue-200 text-xl" %>
+        </div>
+    </section>
     <%= yield %>
   </body>
 </html>
