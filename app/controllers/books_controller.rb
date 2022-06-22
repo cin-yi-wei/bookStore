@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
-
+  before_action :find_book, only: %i[ show edit update destroy ]
+  before_action :find_own_books, only: %i[own]
   def index
     @books = Book.all
   end
@@ -17,7 +17,6 @@ class BooksController < ApplicationController
 
   def create
     @book = current_user.books.new(book_params)
-
     respond_to do |format|
       if @book.save
         format.html { redirect_to book_url(@book), notice: "Book was successfully created." }
@@ -51,10 +50,13 @@ class BooksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_book
+    def find_book
       @book = Book.find(params[:id])
     end
 
+    def find_own_books
+      @books = current_user.books
+    end
     # Only allow a list of trusted parameters through.
     def book_params
       params.require(:book).permit(:title, :price, :page, :isbn)

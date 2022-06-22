@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :books
+  resources :books do
+    collection do
+      get :own
+    end
+  end
   resources :users, except:[:index, :destroy] 
   resources :user_sessions, only: [:new, :create] do
     collection do
